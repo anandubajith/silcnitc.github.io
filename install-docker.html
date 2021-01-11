@@ -27,9 +27,10 @@
         <aside class="column4 mright">
             <menu>
                 <ul>
-                    <li><a href="#navlex" class="sec">Install LEX</a></li>
-                    <li><a href="#navyacc" class="sec">Install YACC</a></li>
-                    <li><a href="#navxsm" class="sec">Install XSM Simulator</a></li>
+                    <li><a href="#installdocker" class="sec">Install Docker</a></li>
+                    <li><a href="#createdockerfile" class="sec">Create Dockerfile</a></li>
+                    <li><a href="#startcontainer" class="sec">Start the container</a></li>
+                    <li><a href="#connectcontainer" class="sec">Connect to container</a></li>
                     <li>
                         <!--For blank space between lines and download button--> &nbsp;
                     </li>
@@ -44,7 +45,7 @@
 
         <section class="columnthird content">
             <h2>Installation using Docker</h2>
-            <article id="navlex" class="detail">
+            <article id="installdocker" class="detail">
                 <h2>Install Docker</h2>
                 <br>
                 <p>
@@ -58,7 +59,7 @@
                 <a href="#navtop" title="Go back up"> top ↑</a>
             </div>
 
-            <article id="navyacc" class="detail">
+            <article id="createdockerfile" class="detail">
                 <h2>Create Dockerfile</h2>
                 <p><kbd>Dockerfile</kbd> contains instructions on how to Docker will setup the container, </p>
                 <p>Create a folder, which will be mapped into the docker image</p>
@@ -96,7 +97,7 @@ WORKDIR /xsm_expl
                 <a href="#navtop" title="Go back up"> top ↑</a>
             </div>
 
-            <article id="navxsm" class="detail">
+            <article id="startcontainer" class="detail">
                 <h2>Start the container instance</h2>
                 <p>
                     Start an instance of Container and map the local folder into `files` directory inside the container
@@ -108,7 +109,7 @@ WORKDIR /xsm_expl
   docker run -v %cd%:/xsm_expl/files -d --name silc -i silc:ubuntu20.04
 </pre>
             </article>
-            <article id="navxsm" class="detail">
+            <article id="connectcontainer" class="detail">
                 <h2>Connecting to the container</h2>
                 
                 Connect to the container
