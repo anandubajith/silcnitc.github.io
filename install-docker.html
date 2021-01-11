@@ -105,7 +105,7 @@ WORKDIR /xsm_expl
   # on linux
   docker run -v $PWD:/xsm_expl/files -d --name silc -i silc:ubuntu20.04 
   # on windows
-  docker run -v %cd%:/pwd -d --name silc -i silc:ubuntu20.04
+  docker run -v %cd%:/xsm_expl/files -d --name silc -i silc:ubuntu20.04
 </pre>
                 Connect to the container
                 <pre>
