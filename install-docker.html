@@ -1,0 +1,154 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>Installation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="center clearfix" id="navtop"> <a href="index.html" class="logo fleft"><img src="img/logo.png"
+                alt=""></a>
+        <nav class="fright">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <!-- <li><a href="help.html">Help</a></li> -->
+                <li><a href="roadmap.html">Roadmap</a></li>
+                <li><a href="documentation.html" class="navactive">Documentation</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="about center part clearfix">
+        <header class="title">
+            <h3 class="fleft">Contents</h3>
+        </header>
+        <aside class="column4 mright">
+            <menu>
+                <ul>
+                    <li><a href="#navlex" class="sec">Install LEX</a></li>
+                    <li><a href="#navyacc" class="sec">Install YACC</a></li>
+                    <li><a href="#navxsm" class="sec">Install XSM Simulator</a></li>
+                    <li>
+                        <!--For blank space between lines and download button--> &nbsp;
+                    </li>
+
+                    <li>
+                        <!--Blank line for space between download button and main title--> &nbsp;
+                    </li>
+                </ul>
+            </menu>
+
+        </aside>
+
+        <section class="columnthird content">
+            <h2>Installation using Docker</h2>
+            <article id="navlex" class="detail">
+                <h2>Install Docker</h2>
+                <br>
+                <p>
+                    Follow instructions here to install Docker on host machine <a
+                        href="https://docs.docker.com/get-docker/"> https://docs.docker.com/get-docker/</a>
+
+                </p>
+            </article>
+
+            <div class="up grid col-one-third" style="float:right">
+                <a href="#navtop" title="Go back up"> top ↑</a>
+            </div>
+
+            <article id="navyacc" class="detail">
+                <h2>Create Dockerfile</h2>
+                <p><kbd>Dockerfile</kbd> contains instructions on how to Docker will setup the container, </p>
+                <p>Create a folder, which will be mapped into the docker image</p>
+                <pre>
+    mkdir compilerlab
+    cd compilerlab
+</pre>
+                <p>Create a `Dockerfile` with following contents</p>
+                <pre>
+FROM ubuntu:20.04
+MAINTAINER Anandu
+
+
+RUN apt-get update \
+    && apt-get install -y bison flex libreadline-dev libc6-dev libfl-dev wget vim build-essential \
+    && wget "https://silcnitc.github.io/files/xsm_expl.tar.gz" \
+    && tar -xzf xsm_expl.tar.gz \
+    && cd xsm_expl && make \
+    && sed -i '1s/^/#!\/usr\/bin\/env bash \n/' /xsm_expl/xsm \
+    && cd /xsm_expl/xfs-interface && ./init
+
+WORKDIR /xsm_expl
+</pre>
+                <br>
+                <p>The given Dockerfile installs the dependencis required for SILC on a base Ubuntu 20.04 container</p>
+                <br>
+                <p>Build the container image by running </p>
+                <pre>
+    docker build -t silc:ubuntu20.04 .
+</pre>
+                </pre>
+            </article>
+
+            <div class="up grid col-one-third" style="float:right">
+                <a href="#navtop" title="Go back up"> top ↑</a>
+            </div>
+
+            <article id="navxsm" class="detail">
+                <h2>Install XSM Machine Simulator</h2>
+                <p>
+                    Start an instance of Container and map the local folder into `files` directory inside the container
+                </p>
+                <pre>
+  # on linux
+  docker run -v $PWD:/xsm_expl/files -d --name silc -i silc:ubuntu20.04 
+  # on windows
+  docker run -v %cd%:/pwd -d --name silc -i silc:ubuntu20.04
+</pre>
+                Connect to the container
+                <pre>
+  docker start silc
+  docker exec -it silc /bin/bash
+</pre>
+                <p>The usage instructions for the XSM simulator can be found <a href="xsmusagespec.html"
+                        target="_blank"> here</a>.</p>
+
+            </article>
+
+            <div class="up grid col-one-third" style="float:right">
+                <a href="#navtop" title="Go back up"> top ↑</a>
+            </div>
+
+
+            <footer class="center part clearfix">
+                <ul class="social column3 mright">
+                    <li><a href="https://github.com/silcnitc">Github</a></li>
+                    <li> <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                            <img alt="Creative Commons License" style="border-width:0"
+                                src="img/creativecommons.png" /></a></li>
+                </ul>
+                <div class="up column3 mright"> <a href="#navtop" class="ir">Go up</a> </div>
+                <nav class="column3">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <!-- <li><a href="uc.html">Contact</a></li> -->
+                    </ul>
+                </nav>
+            </footer>
+
+
+
+</body>
+<!-- Javascript - jQuery
+<script src="http://code.jquery.com/jquery.min.js"></script>-->
+<script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script src="js/selectivizr.js"></script>
+<![endif]-->
+<script src="js/scripts.js"></script>
+<script src="js/inject.js"></script>
+
+</html>
