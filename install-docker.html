@@ -97,7 +97,7 @@ WORKDIR /xsm_expl
             </div>
 
             <article id="navxsm" class="detail">
-                <h2>Connecting to the container</h2>
+                <h2>Start the container instance</h2>
                 <p>
                     Start an instance of Container and map the local folder into `files` directory inside the container
                 </p>
@@ -107,6 +107,10 @@ WORKDIR /xsm_expl
   # on windows
   docker run -v %cd%:/xsm_expl/files -d --name silc -i silc:ubuntu20.04
 </pre>
+            </article>
+            <article id="navxsm" class="detail">
+                <h2>Connecting to the container</h2>
+                
                 Connect to the container
                 <pre>
   docker start silc
